@@ -25,15 +25,70 @@ import androidx.lifecycle.ViewModel
  */
 class GameViewModel : ViewModel() {
 
+    // The current word
+    private var word = ""
+
+    // The current score
+    private var score = 0
+
+    // The list of words - the front of the list is the next word to guess
+    private lateinit var wordList: MutableList<String>
+
     // TODO (06) Once you've copied over the variables and methods, remove any code referring back
     // to the GameFragment. You can also clean up the log statements from the last step.
 
     init {
         Log.i("GameViewModel", "GameViewModel created!")
+
+        // TODO (03) Move over this initialization to the GameViewModel
+        resetList()
+        nextWord()
     }
 
     override fun onCleared() {
         super.onCleared()
         Log.i("GameViewModel", "GameViewModel destroyed!")
     }
+    private fun resetList() {
+        wordList = mutableListOf(
+                "queen",
+                "hospital",
+                "basketball",
+                "cat",
+                "change",
+                "snail",
+                "soup",
+                "calendar",
+                "sad",
+                "desk",
+                "guitar",
+                "home",
+                "railway",
+                "zebra",
+                "jelly",
+                "car",
+                "crow",
+                "trade",
+                "bag",
+                "roll",
+                "bubble"
+        )
+        wordList.shuffle()
+    }
+
+    /**
+     * Moves to the next word in the list
+     */
+    private fun nextWord() {
+        //Select and remove a word from the list
+        if (wordList.isEmpty()) {
+            gameFinished()
+        } else {
+            word = wordList.removeAt(0)
+        }
+        updateWordText()
+        updateScoreText()
+    }
+
+
 }

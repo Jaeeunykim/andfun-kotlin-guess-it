@@ -36,14 +36,7 @@ class GameFragment : Fragment() {
     private lateinit var viewModel: GameViewModel
 
     // TODO (01) Move over the word, score and wordList variables to the GameViewModel
-    // The current word
-    private var word = ""
 
-    // The current score
-    private var score = 0
-
-    // The list of words - the front of the list is the next word to guess
-    private lateinit var wordList: MutableList<String>
 
     private lateinit var binding: GameFragmentBinding
 
@@ -62,9 +55,6 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProviders.of")
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        // TODO (03) Move over this initialization to the GameViewModel
-        resetList()
-        nextWord()
 
         // TODO (04) Update these onClickListeners to refer to call methods in the ViewModel then
         // update the UI
@@ -80,32 +70,7 @@ class GameFragment : Fragment() {
     /**
      * Resets the list of words and randomizes the order
      */
-    private fun resetList() {
-        wordList = mutableListOf(
-                "queen",
-                "hospital",
-                "basketball",
-                "cat",
-                "change",
-                "snail",
-                "soup",
-                "calendar",
-                "sad",
-                "desk",
-                "guitar",
-                "home",
-                "railway",
-                "zebra",
-                "jelly",
-                "car",
-                "crow",
-                "trade",
-                "bag",
-                "roll",
-                "bubble"
-        )
-        wordList.shuffle()
-    }
+
 
     /**
      * Called when the game is finished
@@ -115,19 +80,7 @@ class GameFragment : Fragment() {
         findNavController(this).navigate(action)
     }
 
-    /**
-     * Moves to the next word in the list
-     */
-    private fun nextWord() {
-        //Select and remove a word from the list
-        if (wordList.isEmpty()) {
-            gameFinished()
-        } else {
-            word = wordList.removeAt(0)
-        }
-        updateWordText()
-        updateScoreText()
-    }
+
 
     /** Methods for buttons presses **/
 
